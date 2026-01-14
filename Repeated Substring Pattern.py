@@ -4,7 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        # My notes:
+        # Intuition:
         # We have a string
         # Possibilities: all the same letters
         # O(n) attempt (Go through entire string once):
@@ -30,7 +30,13 @@ class Solution(object):
         closer to O(n^2). A for loop would likely be a better choice """
 
         # New attempt: 
-
+        # Approach:
+        """ Given a string s, first check if one half is equal to the other and return True if so
+        If not, then the only condition that would result in returning True is where the valid 
+        substring is repeated an odd number of times. So I'd like to have a way to keep track of this.
+        So I store len(s) in L, and I use a for loop that runs on the condition that L is divisible by i 
+        and that multiplying the first ith of the string by i gives s. 
+        """
         L = len(s)
         if L % 2 == 0 and (s[: (L//2)] * 2 == s):
             return True
@@ -38,5 +44,9 @@ class Solution(object):
             if L % (i + 2) == 0 and s[:(L // (i + 2))] * (i + 2) == s:
                 return True
         return False
-        # This works! and according to leetcode, it's O(N) complexity!
+        # This works! and according to leetcode, it's runtime is of O(N) complexity (8ms) and beats 45%
+        # of solutions
+
+        # In terms of memory, this (referring to New attempt only) has O(1) complexity and beats
+        # 76.08% of solutions. Already made great progress from when I first started out
         
